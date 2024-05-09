@@ -102,7 +102,8 @@ const PurchaseOrderDetails = () => {
                                         </TableCell>
                                         <TableCell>
                                             <QRCode
-                                                value={product.id}
+                                                // value={product.id}
+                                                value={`http://172.16.12.148:8000/redemptions?purchaseOrderId=${purchaseOrder.id}&productId=${product.id}`}
                                                 size={40}
                                             />
                                         </TableCell>

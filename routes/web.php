@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RedemptionController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -47,6 +48,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::post('/redeem', [RedemptionController::class, 'redeem']);
+    Route::get('/redemptions', [RedemptionController::class, 'show'])->name('redemptions.show');
+
 });
 
 require __DIR__ . '/auth.php';
