@@ -1,6 +1,7 @@
 import Header from "@/Components/Header";
 import { Link, Head } from "@inertiajs/react";
 import { Button } from "@nextui-org/react";
+import Footer from "@/Components/Footer";
 
 export default function Welcome({ auth }) {
     return (
@@ -8,7 +9,7 @@ export default function Welcome({ auth }) {
             <Head title="Welcome" />
             <Header auth={auth} />
 
-            <div className="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
+            <div className="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white bg-gray-50">
                 <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                     <main>
                         <div className="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:size-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/squared-bg-element.svg')]">
@@ -38,8 +39,9 @@ export default function Welcome({ auth }) {
 
                                 <div className="mt-8 gap-3 flex justify-center">
                                     <Button
+                                    as={Link}
                                         className="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full py-3 px-4 dark:focus:ring-offset-gray-800"
-                                        href="#"
+                                        href={route("register")}
                                     >
                                         Start now - It's free
                                     </Button>
@@ -81,9 +83,9 @@ export default function Welcome({ auth }) {
                         </div>
                     </main>
 
-                    {/* <footer className="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
-                        <FooterComponent />
-                    </footer> */}
+                    <footer className="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+                        <Footer />
+                    </footer>
                 </div>
             </div>
         </>

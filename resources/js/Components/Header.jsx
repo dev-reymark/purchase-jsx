@@ -12,11 +12,20 @@ import {
     Spacer,
 } from "@nextui-org/react";
 import ApplicationLogo from "./ApplicationLogo";
+import { Inertia } from "@inertiajs/inertia";
 
 export default function Header({ auth }) {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-    const menuItems = ["Profile", "Help & Feedback", "Log Out"];
+    const menuItems = [
+        { label: "Profile", url: "/profile" },
+        { label: "Help & Feedback", url: "/help" },
+        { label: "Log Out", action: "logout" },
+    ];
+
+    const handleLogout = () => {
+        Inertia.post(route("logout"));
+    };
 
     return (
         <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -38,7 +47,9 @@ export default function Header({ auth }) {
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="/contactus">Contact Us</Link>
+                    <Link color="foreground" href="/contactus">
+                        Contact Us
+                    </Link>
                 </NavbarItem>
             </NavbarContent>
             <NavbarContent justify="end">
@@ -72,24 +83,46 @@ export default function Header({ auth }) {
                 </NavbarItem>
             </NavbarContent>
             <NavbarMenu>
-                {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
+                {auth.user ? (
+                    <>
+                        {menuItems.map((item, index) => (
+                            <NavbarMenuItem key={`${item.label}-${index}`}>
+                                {item.action === "logout" ? (
+                                    <Link
+                                        color="danger"
+                                        size="lg"
+                                        onClick={handleLogout}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        color="foreground"
+                                        className="w-full"
+                                        href={item.url}
+                                        size="lg"
+                                    >
+                                        {item.label}
+                                    </Link>
+                                )}
+                            </NavbarMenuItem>
+                        ))}
+                    </>
+                ) : (
+                    <NavbarMenuItem>
+                        <Link color="foreground" className="w-full" size="lg">
+                            Help & Feedback
+                        </Link>
                         <Link
-                            color={
-                                index === 2
-                                    ? "primary"
-                                    : index === menuItems.length - 1
-                                    ? "danger"
-                                    : "foreground"
-                            }
+                            color="foreground"
                             className="w-full"
-                            href="#"
+                            href="/contactus"
                             size="lg"
                         >
-                            {item}
+                            Contact Us
                         </Link>
                     </NavbarMenuItem>
-                ))}
+                )}
             </NavbarMenu>
         </Navbar>
     );

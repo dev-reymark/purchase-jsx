@@ -48,10 +48,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
-    Route::post('/redeem', [RedemptionController::class, 'redeem']);
-    Route::get('/redemptions', [RedemptionController::class, 'show'])->name('redemptions.show');
-
 });
 
+
 require __DIR__ . '/auth.php';
+
+Route::post('/redeem', [RedemptionController::class, 'redeem']);
+Route::get('/redemptions', [RedemptionController::class, 'show'])->name('redemptions.show');
